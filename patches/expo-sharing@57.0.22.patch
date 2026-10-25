@@ -1,10 +1,11 @@
 diff --git a/android/src/main/java/expo/modules/sharing/ShareIntoUtils.kt b/android/src/main/java/expo/modules/sharing/ShareIntoUtils.kt
 --- a/android/src/main/java/expo/modules/sharing/ShareIntoUtils.kt
 +++ b/android/src/main/java/expo/modules/sharing/ShareIntoUtils.kt
-@@ -47,9 +47,26 @@
+@@ -47,10 +47,27 @@
  internal fun isShareIntent(intent: Intent): Boolean {
    val allowedShareActions =
      listOf("android.intent.action.SEND", "android.intent.action.SEND_MULTIPLE")
+ 
 -  return intent.type != null && allowedShareActions.contains(intent.action)
 +  // Android can recreate a task with its original SEND intent. That is a
 +  // history launch, not a new share, even after the JS process has been killed.
